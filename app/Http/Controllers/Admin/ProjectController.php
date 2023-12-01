@@ -50,7 +50,7 @@ class ProjectController extends Controller
         $data = $request->all();
         $new_project = new Project();
         $new_project->fill($data);
-        $new_project->slug = Str::slug($request->title, '-');
+        $new_project->slug = Project::generateSlug($request->title, '-');
         $new_project->save();
 
         return redirect()->route('admin.projects.show' , $new_project);

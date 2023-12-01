@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Type;
+use App\Models\Project;
+use Illuminate\Support\Str;
+use App\Http\Requests\TypeRequest;
 
 class TypeController extends Controller
 {
@@ -26,7 +29,9 @@ class TypeController extends Controller
      */
     public function create()
     {
-        //
+        $types = Type::orderBy('id', 'desc')->get();
+
+        return view('admin.types.create', compact('types'));
     }
 
     /**
@@ -35,9 +40,16 @@ class TypeController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TypeRequest $request)
     {
-        //
+        $data = $request->all();
+        $new_type = new Type();
+        $new_type->slug = Type::generateSlug($request->title, '-');
+        $new_type->fill($data);
+
+        $new_type->save();
+
+        return redirect()->route('admin.types.index');
     }
 
     /**
@@ -46,9 +58,9 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Type $type)
     {
-        //
+        return view('admin.types.show', $type);
     }
 
     /**
