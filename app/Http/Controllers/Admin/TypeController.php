@@ -44,7 +44,7 @@ class TypeController extends Controller
     {
         $data = $request->all();
         $new_type = new Type();
-        $new_type->slug = Type::generateSlug($request->title, '-');
+        $new_type->slug = Type::generateSlug($request->name, '-');
         $new_type->fill($data);
 
         $new_type->save();
