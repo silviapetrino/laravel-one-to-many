@@ -92,8 +92,10 @@ class TypeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Type $type)
     {
-        //
+        $route = route('admin.projects.destroy', $type);
+        $type->delete();
+        return redirect()->route('admin.types.index')->with('success', 'the type was successfully deleted');
     }
 }
