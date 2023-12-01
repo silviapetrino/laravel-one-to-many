@@ -10,7 +10,7 @@
 
         <div class="card mb-5" style="width: 35rem;">
 
-            <div class="card">
+            <div class="card"></div>
                 <div class="card-body">
                 <h5 class="card-title">{{ $project->title}}</h5>
                   {{-- print type if exists --}}
@@ -23,9 +23,9 @@
 
                 </div>
             </div>
-
+            <a class="btn btn-light fw-bold" href="{{ route('admin.projects.index')}}"><i class="fa-solid fa-arrow-left"></i></a>
         </div>
-        <a class="btn btn-light fw-bold" href="{{ route('admin.projects.index')}}"><i class="fa-solid fa-arrow-left"></i></a>
+
 
 </div>
 
